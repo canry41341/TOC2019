@@ -4,6 +4,7 @@ from fsm import TocMachine
 
 
 VERIFY_TOKEN = "123"
+
 machine = TocMachine(
     states=[
         'user',
@@ -14,7 +15,9 @@ machine = TocMachine(
         'state5',
         'state6',
         'state7',
-        'state8'
+        'state8',
+        'state9',
+        'state10'
     ],
     transitions=[
         {
@@ -40,7 +43,7 @@ machine = TocMachine(
             'conditions': 'is_going_to_state4'
         },{
             'trigger': 'advance',
-            'source': 'user',
+            'source': 'state9',
             'dest': 'state5',
             'conditions': 'is_going_to_state5'
         },{
@@ -55,19 +58,29 @@ machine = TocMachine(
             'conditions': 'is_going_to_state7'
         },{
             'trigger': 'advance',
-            'source': 'user',
+            'source': 'state4',
             'dest': 'state8',
             'conditions': 'is_going_to_state8'
+        },{
+            'trigger': 'advance',
+            'source': 'state4',
+            'dest': 'state9',
+            'conditions': 'is_going_to_state9'
+        },{
+            'trigger': 'advance',
+            'source': 'state9',
+            'dest': 'state10',
+            'conditions': 'is_going_to_state10'
         },{
             'trigger': 'go_back',
             'source': [
                 'state8',
                 'state2',
                 'state3',
-                'state4',
                 'state5',
                 'state6',
-                'state7'
+                'state7',
+                'state10'
             ],
             'dest': 'user'
         },
