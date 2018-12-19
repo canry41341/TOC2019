@@ -143,27 +143,16 @@ def webhook_handler():
                 if text.lower() != '你好' and text.lower() != '介紹' and text.lower() != '減肥' and text.lower() != '即時新聞' and text != '1' and text != '2':
                     print("I AM IN!!")
 
-                    buttons = [{'type': 'web_url', 'title': 'Open Web URL', 'value': 'https://www.oculus.com/en-us/rift/'}]
-                    page.send(sender_id, Template.Buttons("hello", buttons))
-
-
-
-
                     r = requests.get(google_url, params = my_params)
                     if r.status_code == requests.codes.ok:
                         soup = BeautifulSoup(r.text,'html.parser')
                         items = soup.select('div.g > h3.r > a[href^="/url"]')
                         for s in items:
                             i += 1
-                            ch = ''
-                            n = 7
-                            sstr = s.get('href')
-                            sstr = n*ch + sstr[7:]
-                            buttons['value'] = sstr
                             # 新聞標題
                             page.send(sender_id,"標題：" + s.text)
                             # 新聞網址
-                            page.send(sender_id, Template.Buttons(s.text,buttons))
+                            page.send(sender_id,"網址：" + s.get("href")))
                             if i == 1:
                                 break
         return 'OK'
