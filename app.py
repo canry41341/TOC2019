@@ -149,12 +149,13 @@ def webhook_handler():
                         items = soup.select('div.g > h3.r > a[href^="/url"]')
                         for s in items:
                             i += 1
-                            # 新聞標題
-                            page.send(sender_id,"標題：" + (s+1).text)
-                            # 新聞網址
-                            page.send(sender_id,"網址：" + (s+1).get('href'))
-                            if i == 1:
-                                break
+                            if i == 2:
+                                # 新聞標題
+                                page.send(sender_id,"標題：" + s.text)
+                                # 新聞網址
+                                page.send(sender_id,"網址：" + s.get('href'))
+                                if i == 3:
+                                    break
         return 'OK'
 
 
