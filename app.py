@@ -138,22 +138,23 @@ def webhook_handler():
         if machine.state == "user":
             i = 0;
             text = event['message']['text']
-            my_params['q'] = text
-            if text.lower() != '你好' and text.lower() != '介紹' and text.lower() != '減肥' and text.lower() != '即時新聞' and text != '1' and text != '2':
-                print("I AM IN!!")
-                print(text)
-                rr = requests.get(google_url, params = my_params)
-                if rr.status_code == requests.codes.ok:
-                    soup = BeautifulSoup(rr.text,'html.parser')
-                    items = soup.select('div.g > h3.r > a[href^="/url"]')
-                    for s in items:
-                        i += 1
-                        # 新聞標題
-                        page.send(sender_id,"標題：" + s.text)
-                        # 新聞網址
-                        page.send(sender_id,"網址：" + s.get('href'))
-                        if i == 1:
-                            break
+            if event['message'].get('text'):
+                my_params['q'] = text
+                if text.lower() != '你好' and text.lower() != '介紹' and text.lower() != '減肥' and text.lower() != '即時新聞' and text != '1' and text != '2':
+                    print("I AM IN!!")
+                    print(text)
+                    rr = requests.get(google_url, params = my_params)
+                    if rr.status_code == requests.codes.ok:
+                        soup = BeautifulSoup(rr.text,'html.parser')
+                        items = soup.select('div.g > h3.r > a[href^="/url"]')
+                        for s in items:
+                            i += 1
+                            # 新聞標題
+                            page.send(sender_id,"標題：" + s.text)
+                            # 新聞網址
+                            page.send(sender_id,"網址：" + s.get('href'))
+                            if i == 1:
+                                break
         return 'OK'
 
 
