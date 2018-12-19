@@ -1,6 +1,6 @@
 from bottle import route, run, request, abort, static_file
 import requests
-from fbmq import Page
+from fbmq import Pageㄝ,Template
 from bs4 import BeautifulSoup
 
 from fsm import TocMachine
@@ -151,7 +151,18 @@ def webhook_handler():
                             # 新聞標題
                             page.send(sender_id,"標題：" + s.text)
                             # 新聞網址
-                            page.send(sender_id,"網址：" + s.get('href'))
+                            page.send(recipient_id, Template.Generic([
+                            Template.GenericElement("touch",
+                            buttons=[
+                              Template.ButtonWeb("Open Web URL", s.get('href')),
+                              Template.ButtonPostBack("tigger Postback", "DEVELOPED_DEFINED_PAYLOAD"),
+                            ])
+                            ]))
+
+
+
+
+                            #page.send(sender_id,"網址：" + s.get('href'))
                             if i == 1:
                                 break
         return 'OK'
