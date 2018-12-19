@@ -143,12 +143,10 @@ def webhook_handler():
                 if text.lower() != '你好' and text.lower() != '介紹' and text.lower() != '減肥' and text.lower() != '即時新聞' and text != '1' and text != '2':
                     print("I AM IN!!")
 
-                    buttons = [
-                        Templates.ButtonWeb("Open Web URL", "https://www.oculus.com/en-us/rift/"),
-                        Templates.ButtonPostBack("trigger Postback", "DEVELOPED_DEFINED_PAYLOAD"),
-                        Templates.ButtonPhoneNumber("Call Phone Number", "+16505551234")
-                    ]
-                    page.send(recipient_id, Template.Buttons("hello", buttons))
+                    buttons = [{'type': 'web_url', 'title': 'Open Web URL', 'value': 'https://www.oculus.com/en-us/rift/'},
+                        {'type': 'postback', 'title': 'trigger Postback', 'value': 'DEVELOPED_DEFINED_PAYLOAD'},
+                        {'type': 'phone_number', 'title': 'Call Phone Number', 'value': '+16505551234'}]
+                    page.send(sender_id, Template.Buttons("hello", buttons))
 
 
 
