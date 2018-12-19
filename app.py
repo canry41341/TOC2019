@@ -11,6 +11,8 @@ VERIFY_TOKEN = "123"
 
 PORT = os.environ['PORT']
 d = {"ID":1}
+my_params = {'q':'寒流'}
+
 page = Page(ACCESS_TOKEN)
 google_url = 'https://www.google.com.tw/search'
 machine = TocMachine(
@@ -137,7 +139,8 @@ def webhook_handler():
             text = event['message']['text']
             if text.lower() != '你好' and text.lower() != '介紹' and text.lower() != '減肥' and text.lower() != '即時新聞' and text != '1' and text != '2':
                 print("I AM IN!!")
-                rr = requests.get(google_url, params = text)
+                print(text)
+                rr = requests.get(google_url, params = my_params)
                 if rr.status_code == requests.codes.ok:
                     soup = BeautifulSoup(rr.text,'html.parser')
                     items = soup.select('div.g > h3.r > a[href^="/url"]')
