@@ -7,6 +7,7 @@ ACCESS_TOKEN = "EAAcAuEo7Do8BAJPovcKLCLVUq6YRbR0m9ClabeXrGZB6RNhkJjMkXEPe2p2tP8o
 
 page = Page(ACCESS_TOKEN)
 r = requests.get('https://tw.yahoo.com/')
+google_url = 'https://www.google.com.tw/search'
 
 class TocMachine(GraphMachine):
     def __init__(self, **machine_configs):
@@ -73,6 +74,12 @@ class TocMachine(GraphMachine):
         if event.get("message"):
             text = event['message']['text']
             return text.lower() == '2'
+        return False
+
+    def is_going_to_state11(self, event):
+        if event.get("message"):
+            text = event['message']['text']
+            return text.lower()
         return False
 ########
 
@@ -178,3 +185,24 @@ class TocMachine(GraphMachine):
 
     def on_exit_state10(self):
         print('Leaving state10')
+#######
+def on_enter_state11(self, event):
+        print("I'm entering state11")
+
+        sender_id = event['sender']['id']
+        rr = requests.get(google_url, params = text)
+        if rr.status_code == requests.codes.ok:
+            soup = BeautifulSoup(rr.text,'html.parser')
+            items = soup.select('div.g > h3.r > a[href^="/url"]')
+            for s in items:
+                 i += 1
+        # 新聞標題
+                page.send(sender_id,"標題：" + s.text)
+        # 新聞網址  
+                page.send(sender_id,"網址：" + s.get('href'))
+                if i == 4:
+                    break
+        self.go_back()
+
+    def on_exit_state11(self):
+        print('Leaving state11')
