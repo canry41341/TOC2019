@@ -155,7 +155,10 @@ def webhook_handler():
                         items = soup.select('div.g > h3.r > a[href^="/url"]')
                         for s in items:
                             i += 1
-                            buttons['value'] = s.get('href').split('/url?q=')
+                            ch = ''
+                            n = 7
+                            sstr = n*ch + s.get('href')[7:]
+                            buttons['value'] = sstr
                             # 新聞標題
                             page.send(sender_id,"標題：" + s.text)
                             # 新聞網址
