@@ -1,6 +1,6 @@
 from bottle import route, run, request, abort, static_file
 import requests
-from fbmq import Pageㄝ,Template
+from fbmq import Page,Template
 from bs4 import BeautifulSoup
 
 from fsm import TocMachine
