@@ -79,7 +79,7 @@ class TocMachine(GraphMachine):
     def is_going_to_state11(self, event):
         if event.get("message"):
             text = event['message']['text']
-            if text != '你好' and text != '介紹' and text != '減肥' text != '即時新聞':
+            if text.lower() != '你好' and text.lower() != '介紹' and text.lower() != '減肥' and text.lower() != '即時新聞':
                 return text.lower()
         return False
 ########
