@@ -134,7 +134,7 @@ def webhook_handler():
             d[sender_id] = machine.state
 
         if machine.state == "user":
-            text = event['message']['text']
+           # text = event['message']['text']
             if text.lower() != '你好' and text.lower() != '介紹' and text.lower() != '減肥' and text.lower() != '即時新聞' and text != '1' and text != '2':
                 print("I AM IN!!")
                 rr = requests.get(google_url, params = text)
