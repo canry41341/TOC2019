@@ -123,6 +123,7 @@ def webhook_handler():
             machine.state = d[sender_id]
         if event['message'].get('text'):
             machine.advance(event)
+            d[sender_id] = machine.state
         return 'OK'
 
 
