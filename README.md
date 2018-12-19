@@ -5,7 +5,8 @@ A Facebook messenger bot based on a finite state machine
 
 ## Finite State Machine
 ![fsm](./img/show-fsm.png)
-
+## Describtion
+** 總共有10個states，其中state1,state5,state9為相連，剩下的states都會獨自返回
 ## Usage
 
 * messenger
@@ -20,6 +21,8 @@ A Facebook messenger bot based on a finite state machine
          * Reply: 當天即時新聞
     * Input: "減肥"
          * Reply: "希望你能繼續保持下去～加油！"
+    * Input: 任何文字
+         * Reply: google search result 跟 url
 
 ## Reference
  Google大神
