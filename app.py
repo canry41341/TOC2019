@@ -1,12 +1,17 @@
 from bottle import route, run, request, abort, static_file
+import requests
+from fbmq import Page
+from bs4 import BeautifulSoup
 
 from fsm import TocMachine
 import os
 
+ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 VERIFY_TOKEN = "123"
 PORT = os.environ['PORT']
 d = {"ID":1}
-
+page = Page(ACCESS_TOKEN)
+google_url = 'https://www.google.com.tw/search'
 machine = TocMachine(
     states=[
         'user',
@@ -133,6 +138,22 @@ def webhook_handler():
         if event['message'].get('text'):
             machine.advance(event)
             d[sender_id] = machine.state
+
+        if machine.state == "user":
+            text = event['message']['text']
+            if text.lower() != '你好' and text.lower() != '介紹' and text.lower() != '減肥' and text.lower() != '即時新聞':
+                rr = requests.get(google_url, params = text)
+                if rr.status_code == requests.codes.ok:
+                soup = BeautifulSoup(rr.text,'html.parser')
+                items = soup.select('div.g > h3.r > a[href^="/url"]')
+                for s in items:
+                    i += 1
+                    # 新聞標題
+                    page.send(sender_id,"標題：" + s.text)
+                    # 新聞網址
+                    page.send(sender_id,"網址：" + s.get('href'))
+                    if i == 4:
+                        break
         return 'OK'
 
 
