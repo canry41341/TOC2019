@@ -6,7 +6,7 @@ A Facebook messenger bot based on a finite state machine
 ## Finite State Machine
 ![fsm](./img/show-fsm.png)
 ## Describtion
-** 總共有10個states，其中state1,state5,state9為相連，剩下的states都會獨自返回
+**總共有10個states，其中state1,state5,state9為相連，剩下的states都會獨自返回
 ## Usage
 
 * messenger
