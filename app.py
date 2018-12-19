@@ -14,7 +14,7 @@ PORT = os.environ['PORT']
 d = {"ID":1}
 
 page = Page(ACCESS_TOKEN)
-google_url = 'https://www.google.com.tw/search'
+google_url = 'https://www.google.com/search'
 machine = TocMachine(
     states=[
         'user',
@@ -149,13 +149,12 @@ def webhook_handler():
                         items = soup.select('div.g > h3.r > a[href^="/url"]')
                         for s in items:
                             i += 1
-                            if i == 2:
-                                # 新聞標題
-                                page.send(sender_id,"標題：" + s.text)
-                                # 新聞網址
-                                page.send(sender_id,"網址：" + s.get('href'))
-                                if i == 3:
-                                    break
+                            # 新聞標題
+                            page.send(sender_id,"標題：" + s.text)
+                            # 新聞網址
+                            page.send(sender_id,"網址：" + s.get('href'))
+                            if i == 3:
+                                break
         return 'OK'
 
 
