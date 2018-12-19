@@ -143,7 +143,7 @@ def webhook_handler():
                 if text.lower() != '你好' and text.lower() != '介紹' and text.lower() != '減肥' and text.lower() != '即時新聞' and text != '1' and text != '2':
                     print("I AM IN!!")
 
-                    buttons = {'type': 'web_url', 'title': 'Open Web URL', 'value': 'https://www.oculus.com/en-us/rift/'}
+                    buttons = [{'type': 'web_url', 'title': 'Open Web URL', 'value': 'https://www.oculus.com/en-us/rift/'}]
                     page.send(sender_id, Template.Buttons("hello", buttons))
 
 
@@ -155,11 +155,11 @@ def webhook_handler():
                         items = soup.select('div.g > h3.r > a[href^="/url"]')
                         for s in items:
                             i += 1
-                            buttons['value'] = s.get('href')
+                           # buttons['value'] = s.get('href')
                             # 新聞標題
                             page.send(sender_id,"標題：" + s.text)
                             # 新聞網址
-                            page.send(sender_id, Template.Buttons(s.text,buttons))
+                            page.send(sender_id, Template.Buttons(s.text,s.get('href')))
                             if i == 1:
                                 break
         return 'OK'
