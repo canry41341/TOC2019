@@ -134,9 +134,9 @@ def webhook_handler():
             d[sender_id] = machine.state
 
         if machine.state == "user":
-            print("I AM IN")
             text = event['message']['text']
             if text.lower() != '你好' and text.lower() != '介紹' and text.lower() != '減肥' and text.lower() != '即時新聞':
+                print("I AM IN!!")
                 rr = requests.get(google_url, params = text)
                 if rr.status_code == requests.codes.ok:
                     soup = BeautifulSoup(rr.text,'html.parser')
