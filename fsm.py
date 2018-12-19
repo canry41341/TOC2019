@@ -196,7 +196,7 @@ class TocMachine(GraphMachine):
             soup = BeautifulSoup(rr.text,'html.parser')
             items = soup.select('div.g > h3.r > a[href^="/url"]')
             for s in items:
-                 i += 1
+                i += 1
         # 新聞標題
                 page.send(sender_id,"標題：" + s.text)
         # 新聞網址  
