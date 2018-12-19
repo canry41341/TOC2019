@@ -8,7 +8,7 @@ import os
 
 ACCESS_TOKEN = "EAAcAuEo7Do8BAJPovcKLCLVUq6YRbR0m9ClabeXrGZB6RNhkJjMkXEPe2p2tP8oGXYN31mE10WniNb9mgeLjGNbZAnpuReNbn6mlqtOZAyGd1qMwp1iDiQhoFIyClIuA13gzWi3N6FGhDl9khnImAU9IKAIOmyMfIZBEujZAx3nRZAgyUi7avb"
 VERIFY_TOKEN = "123"
-my_params = {'q':'hi'}
+my_params = {'q': 'hi'}
 
 PORT = os.environ['PORT']
 d = {"ID":1}
@@ -139,17 +139,17 @@ def webhook_handler():
             i = 0;
             text = event['message']['text']
             if event['message'].get('text'):
-                my_params['q'] = 'text'
+                my_params['q'] = text
                 if text.lower() != '你好' and text.lower() != '介紹' and text.lower() != '減肥' and text.lower() != '即時新聞' and text != '1' and text != '2':
                     print("I AM IN!!")
-                    print(text)
-                    rr = requests.get(google_url, params = my_params)
-                    if rr.status_code == requests.codes.ok:
-                        soup = BeautifulSoup(rr.text,'html.parser')
+                    r = requests.get(google_url, params = my_params)
+                    if r.status_code == requests.codes.ok:
+                        soup = BeautifulSoup(r.text,'html.parser')
                         items = soup.select('div.g > h3.r > a[href^="/url"]')
                         for s in items:
                             i += 1
                             # 新聞標題
+                            page.send(sender_id,"以下是收尋"+"'"+text="'"+"的結果:")
                             page.send(sender_id,"標題：" + s.text)
                             # 新聞網址
                             page.send(sender_id,"網址：" + s.get('href'))
