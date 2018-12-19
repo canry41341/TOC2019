@@ -144,7 +144,7 @@ def webhook_handler():
                     print("I AM IN!!")
 
                     buttons = {'type': 'web_url', 'title': 'Open Web URL', 'value': 'https://www.oculus.com/en-us/rift/'}
-                    #page.send(sender_id, Template.Buttons("hello", buttons))
+                    page.send(sender_id, Template.Buttons("hello", buttons))
 
 
 
@@ -159,7 +159,7 @@ def webhook_handler():
                             # 新聞標題
                             page.send(sender_id,"標題：" + s.text)
                             # 新聞網址
-                            page.send(sender_id, Template.Button(s.text,buttons))
+                            page.send(sender_id, Template.Buttons(s.text,buttons))
                             if i == 1:
                                 break
         return 'OK'
