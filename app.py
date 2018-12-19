@@ -121,6 +121,8 @@ def webhook_handler():
         global d
         if sender_id in d:
             machine.state = d[sender_id]
+        else:
+            d[sender_id] = user
         if event['message'].get('text'):
             machine.advance(event)
             d[sender_id] = machine.state
