@@ -149,7 +149,6 @@ def webhook_handler():
                         for s in items:
                             i += 1
                             # 新聞標題
-                            page.send(sender_id,"以下是收尋"+"'"+text="'"+"的結果:")
                             page.send(sender_id,"標題：" + s.text)
                             # 新聞網址
                             page.send(sender_id,"網址：" + s.get('href'))
