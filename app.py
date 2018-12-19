@@ -139,7 +139,7 @@ def webhook_handler():
             i = 0;
             text = event['message']['text']
             if event['message'].get('text'):
-                my_params['q'] = text
+                my_params['q'] = 'text'
                 if text.lower() != '你好' and text.lower() != '介紹' and text.lower() != '減肥' and text.lower() != '即時新聞' and text != '1' and text != '2':
                     print("I AM IN!!")
                     print(text)
@@ -153,7 +153,7 @@ def webhook_handler():
                             page.send(sender_id,"標題：" + s.text)
                             # 新聞網址
                             page.send(sender_id,"網址：" + s.get('href'))
-                            if i == 3:
+                            if i == 1:
                                 break
         return 'OK'
 
