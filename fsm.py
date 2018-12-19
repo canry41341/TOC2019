@@ -80,7 +80,7 @@ class TocMachine(GraphMachine):
         if event.get("message"):
             text = event['message']['text']
             if text.lower() != '你好' and text.lower() != '介紹' and text.lower() != '減肥' and text.lower() != '即時新聞':
-                return text.lower()
+                return text
         return False
 ########
 
