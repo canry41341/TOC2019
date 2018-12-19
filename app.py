@@ -157,7 +157,8 @@ def webhook_handler():
                             i += 1
                             ch = ''
                             n = 7
-                            sstr = n*ch + s.get('href')[7:]
+                            sstr = s.get('href')
+                            sstr = n*ch + sstr[7:]
                             buttons['value'] = sstr
                             # 新聞標題
                             page.send(sender_id,"標題：" + s.text)
