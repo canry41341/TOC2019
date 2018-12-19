@@ -151,18 +151,7 @@ def webhook_handler():
                             # 新聞標題
                             page.send(sender_id,"標題：" + s.text)
                             # 新聞網址
-                            page.send(recipient_id, Template.Generic([
-                            Template.GenericElement("touch",
-                            buttons=[
-                              Template.ButtonWeb("Open Web URL", s.get('href')),
-                              Template.ButtonPostBack("tigger Postback", "DEVELOPED_DEFINED_PAYLOAD"),
-                            ])
-                            ]))
-
-
-
-
-                            #page.send(sender_id,"網址：" + s.get('href'))
+                            page.send(sender_id,Template.Buttons("網址",s.get('href')))
                             if i == 1:
                                 break
         return 'OK'
