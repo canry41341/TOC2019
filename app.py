@@ -5,6 +5,7 @@ import os
 
 VERIFY_TOKEN = "123"
 PORT = os.environ['PORT']
+global d = {'ID':'state'}
 
 machine = TocMachine(
     states=[
@@ -116,6 +117,11 @@ def webhook_handler():
 
     if body['object'] == "page":
         event = body['entry'][0]['messaging'][0]
+        sender_id = event['sender']['id']
+        if sender_id in d:
+            machine.state = d[sender_id]
+        else:
+            machine.state = "user"
         if event['message'].get('text'):
             machine.advance(event)
         return 'OK'
