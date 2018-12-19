@@ -8,6 +8,7 @@ import os
 
 ACCESS_TOKEN = "EAAcAuEo7Do8BAJPovcKLCLVUq6YRbR0m9ClabeXrGZB6RNhkJjMkXEPe2p2tP8oGXYN31mE10WniNb9mgeLjGNbZAnpuReNbn6mlqtOZAyGd1qMwp1iDiQhoFIyClIuA13gzWi3N6FGhDl9khnImAU9IKAIOmyMfIZBEujZAx3nRZAgyUi7avb"
 VERIFY_TOKEN = "123"
+my_params = {'q':'hi'}
 
 PORT = os.environ['PORT']
 d = {"ID":1}
@@ -137,10 +138,11 @@ def webhook_handler():
         if machine.state == "user":
             i = 0;
             text = event['message']['text']
+            my_params['q'] = text
             if text.lower() != '你好' and text.lower() != '介紹' and text.lower() != '減肥' and text.lower() != '即時新聞' and text != '1' and text != '2':
                 print("I AM IN!!")
                 print(text)
-                rr = requests.get(google_url, params = text)
+                rr = requests.get(google_url, params = my_params)
                 if rr.status_code == requests.codes.ok:
                     soup = BeautifulSoup(rr.text,'html.parser')
                     items = soup.select('div.g > h3.r > a[href^="/url"]')
