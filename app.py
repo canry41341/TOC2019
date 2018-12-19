@@ -142,6 +142,18 @@ def webhook_handler():
                 my_params['q'] = text
                 if text.lower() != '你好' and text.lower() != '介紹' and text.lower() != '減肥' and text.lower() != '即時新聞' and text != '1' and text != '2':
                     print("I AM IN!!")
+
+                    buttons = [
+                        Templates.ButtonWeb("Open Web URL", "https://www.oculus.com/en-us/rift/"),
+                        Templates.ButtonPostBack("trigger Postback", "DEVELOPED_DEFINED_PAYLOAD"),
+                        Templates.ButtonPhoneNumber("Call Phone Number", "+16505551234")
+                    ]
+                    page.send(recipient_id, Template.Buttons("hello", buttons))
+
+
+
+
+
                     r = requests.get(google_url, params = my_params)
                     if r.status_code == requests.codes.ok:
                         soup = BeautifulSoup(r.text,'html.parser')
@@ -162,6 +174,9 @@ def show_fsm():
     machine.get_graph().draw('fsm.png', prog='dot', format='png')
     return static_file('fsm.png', root='./', mimetype='image/png')
 
+@page.callback(['DEVELOPED_DEFINED_PAYLOAD'])
+def callback_clicked_button(payload, event):
+    print(payload, event)
 
 if __name__ == "__main__":
     run(host="0.0.0.0", port=PORT, debug=True, reloader=True)
