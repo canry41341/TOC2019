@@ -14,7 +14,7 @@ PORT = os.environ['PORT']
 d = {"ID":1}
 
 page = Page(ACCESS_TOKEN)
-google_url = 'https://www.google.com/search'
+google_url = 'https://www.google.com.tw/search'
 machine = TocMachine(
     states=[
         'user',
