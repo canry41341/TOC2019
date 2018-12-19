@@ -26,7 +26,6 @@ machine = TocMachine(
         'state8',
         'state9',
         'state10',
-        'state11'
     ],
     transitions=[
         {
@@ -81,11 +80,6 @@ machine = TocMachine(
             'dest': 'state10',
             'conditions': 'is_going_to_state10'
         },{
-            'trigger': 'advance',
-            'source': 'user',
-            'dest': 'state11',
-            'conditions': 'is_going_to_state11'
-        },{
             'trigger': 'go_back',
             'source': [
                 'state8',
@@ -95,7 +89,6 @@ machine = TocMachine(
                 'state6',
                 'state7',
                 'state10',
-                'state11'
             ],
             'dest': 'user'
         },
@@ -141,6 +134,7 @@ def webhook_handler():
             d[sender_id] = machine.state
 
         if machine.state == "user":
+            print("I AM IN")
             text = event['message']['text']
             if text.lower() != '你好' and text.lower() != '介紹' and text.lower() != '減肥' and text.lower() != '即時新聞':
                 rr = requests.get(google_url, params = text)

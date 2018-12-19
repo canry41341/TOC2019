@@ -76,12 +76,6 @@ class TocMachine(GraphMachine):
             return text.lower() == '2'
         return False
 
-    def is_going_to_state11(self, event):
-        if event.get("message"):
-            text = event['message']['text']
-            if text.lower() != '你好' and text.lower() != '介紹' and text.lower() != '減肥' and text.lower() != '即時新聞':
-                return text
-        return False
 ########
 
     def on_enter_state1(self, event):
@@ -186,24 +180,3 @@ class TocMachine(GraphMachine):
 
     def on_exit_state10(self):
         print('Leaving state10')
-#######
-    def on_enter_state11(self, event):
-        print("I'm entering state11")
-
-        sender_id = event['sender']['id']
-        rr = requests.get(google_url, params = text)
-        if rr.status_code == requests.codes.ok:
-            soup = BeautifulSoup(rr.text,'html.parser')
-            items = soup.select('div.g > h3.r > a[href^="/url"]')
-            for s in items:
-                i += 1
-        # 新聞標題
-                page.send(sender_id,"標題：" + s.text)
-        # 新聞網址  
-                page.send(sender_id,"網址：" + s.get('href'))
-                if i == 4:
-                    break
-        self.go_back()
-
-    def on_exit_state11(self):
-        print('Leaving state11')
