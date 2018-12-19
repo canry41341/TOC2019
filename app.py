@@ -137,7 +137,7 @@ def webhook_handler():
             text = event['message']['text']
             if text.lower() != '你好' and text.lower() != '介紹' and text.lower() != '減肥' and text.lower() != '即時新聞' and text != '1' and text != '2':
                 print("I AM IN!!")
-                rr = requests.get(google_url, params = {'q':'寒流'})
+                rr = requests.get(google_url, params = text)
                 if rr.status_code == requests.codes.ok:
                     soup = BeautifulSoup(rr.text,'html.parser')
                     items = soup.select('div.g > h3.r > a[href^="/url"]')
