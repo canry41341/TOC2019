@@ -136,7 +136,7 @@ def webhook_handler():
             d[sender_id] = machine.state
 
         if machine.state == "user":
-            i = 0;
+            i = 0
             text = event['message']['text']
             if event['message'].get('text'):
                 my_params['q'] = text
