@@ -95,9 +95,8 @@ machine = TocMachine(
                 'state3',
                 'state5',
                 'state6',
-                'state7',
-                'state10',
-                'state11'
+                'state11',
+                'state10'
             ],
             'dest': 'user'
         },

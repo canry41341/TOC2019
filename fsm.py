@@ -158,7 +158,7 @@ class TocMachine(GraphMachine):
         sender_id = event['sender']['id']
         page.send(sender_id,Attachment.Image("https://i.imgur.com/t56acky.jpg"))
         page.send(sender_id, "希望你能繼續保持下去～加油！")
-        #self.go_back()
+        
 ############
     def on_enter_state8(self, event):
         print("I'm entering state8")
