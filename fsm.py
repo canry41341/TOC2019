@@ -188,7 +188,7 @@ class TocMachine(GraphMachine):
         print('Leaving state10')
 
 
-def on_enter_state11(self, event):
+    def on_enter_state11(self, event):
         print("I'm entering state11")
 
         sender_id = event['sender']['id']
