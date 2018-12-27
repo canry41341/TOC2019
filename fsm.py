@@ -195,5 +195,5 @@ def on_enter_state11(self, event):
         page.send(sender_id, "DEMO")
         self.go_back()
 
-    def on_exit_state10(self):
-        print('Leaving state10')
+    def on_exit_state11(self):
+        print('Leaving state11')
