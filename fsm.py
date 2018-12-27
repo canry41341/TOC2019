@@ -76,6 +76,12 @@ class TocMachine(GraphMachine):
             return text.lower() == '2'
         return False
 
+    def is_going_to_state11(self, event):
+        if event.get("message"):
+            text = event['message']['text']
+            return text.lower() == 'demo'
+        return False
+
 ########
 
     def on_enter_state1(self, event):
@@ -147,12 +153,12 @@ class TocMachine(GraphMachine):
         print('Leaving state6')
 ##############
     def on_enter_state7(self, event):
-        print("I'm entering state6")
+        print("I'm entering state7")
 
         sender_id = event['sender']['id']
         page.send(sender_id,Attachment.Image("https://i.imgur.com/t56acky.jpg"))
         page.send(sender_id, "希望你能繼續保持下去～加油！")
-        self.go_back()
+        #self.go_back()
 ############
     def on_enter_state8(self, event):
         print("I'm entering state8")
@@ -176,6 +182,17 @@ class TocMachine(GraphMachine):
 
         sender_id = event['sender']['id']
         page.send(sender_id, "很好你很乖")
+        self.go_back()
+
+    def on_exit_state10(self):
+        print('Leaving state10')
+
+
+def on_enter_state11(self, event):
+        print("I'm entering state11")
+
+        sender_id = event['sender']['id']
+        page.send(sender_id, "DEMO")
         self.go_back()
 
     def on_exit_state10(self):
